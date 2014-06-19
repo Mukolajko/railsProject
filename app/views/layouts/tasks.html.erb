@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RailsProject</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<span class="right"><%= link_to "Log out", log_out_path %></span>
+<h1>Welcome <%= current_user.username %> Choose you options</h1>
+<div>
+  <%= link_to "Add task", tasks_new_path %>
+  <%= link_to "Show task", tasks_show_path %>
+</div>
+
+</div>
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
+ 
+<%= yield %>
+
+</body>
+</html>
