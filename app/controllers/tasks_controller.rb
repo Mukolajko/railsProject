@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
-  layout "tasks"	
-  def index  	
+  layout "tasks"
+  before_filter :getTasks
+
+  def index
   end
 
   def new
@@ -8,7 +10,7 @@ class TasksController < ApplicationController
   end
 
   def create
-	@task = Task.new(params[:task].merge(:username => current_user.username))
+	  @task = Task.new(params[:task].merge(:username => current_user.username))
   	if @task.save
   	  redirect_to tasks_path, :notice => "Add task to DB"
   	else
@@ -16,7 +18,35 @@ class TasksController < ApplicationController
   	end
   end
 
-  def show
-  	@userTasks = Task.user_tasks(current_user.username)
+  def edit_task
+    if Task.checkURL(params[:id], current_user.username)
+      @editTask = Task.find_by_id(params[:id])
+    else
+      nil
+    end
+  end
+
+  def update
+    @changed = Task.find_by_id(params[:id])
+    @changed.taskname = params[:task][:taskname]
+    @changed.description = params[:task][:description]
+    if @changed.save
+      redirect_to tasks_path, :notice => "Task Updated!"
+    else
+      redirect_to :back, :notice => "Error"
+    end   
+  end
+
+  def delete_conf
+    @removed = Task.find_by_id(params[:id])
+    if @removed.destroy
+      redirect_to tasks_path, :notice => "Deleted"
+    else
+      redirect_to :back, :notice => "Error"
+    end
+  end
+
+  def getTasks
+    @userTasks = Task.user_tasks(current_user.username)
   end
 end

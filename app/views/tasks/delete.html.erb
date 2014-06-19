@@ -1,0 +1,20 @@
+<div>
+  <% if @userTasks %>
+    <table class="task_table">
+      <tr>
+        <td>#</td>   
+        <td>Task name</td>
+        <td>Description</td>
+      </tr>
+    <% @userTasks.each_with_index do |task, index| %>
+      <tr>
+        <td><%= index + 1 %></td>   
+       	<td><%= link_to "#{task.taskname}", tasks_delete_conf_path(:id => task.id) %></td>
+       	<td><%= task.description %></td>
+      </tr>
+    <% end %>  	 
+    </table>	
+  <% else %>
+    <span>No tasks found</span>
+  <% end %>
+</div>
