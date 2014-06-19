@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   	if @user.save
   	  redirect_to root_url, :notice => "sighned up"
   	else
+  	  flash.now[:alert] = "errors"
   	  render "new"
   	end
   end
