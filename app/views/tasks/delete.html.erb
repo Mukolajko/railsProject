@@ -1,20 +1,6 @@
-<div>
+<div id="tasks">
   <% if @userTasks %>
-    <table class="task_table">
-      <tr>
-        <td>#</td>   
-        <td><%= sortable "taskname" %></td>
-        <td><%= sortable "description" %></td>
-      </tr>
-    <% @userTasks.each_with_index do |task, index| %>
-      <tr>
-        <td><%= index + 1 %></td>   
-       	<td><%= link_to "#{task.taskname}", tasks_delete_conf_path(:id => task.id) %></td>
-       	<td><%= task.description %></td>
-      </tr>
-    <% end %>  	 
-    </table>	
-    <%= will_paginate @userTasks %> 
+     <%= render 'task' %>
   <% else %>
     <span>No tasks found</span>
   <% end %>
