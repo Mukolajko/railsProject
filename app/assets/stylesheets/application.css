@@ -11,3 +11,20 @@
  *= require_self
  *= require_tree .
  */
+td {
+	border: 1px solid black;
+}
+
+.task_table tr .current {
+	padding-right: 12px;
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
+.task_table tr .asc {
+	background-image: url(up_arrow.gif);
+}
+
+.task_table tr .desc {
+	background-image: url(down_arrow.gif);
+}

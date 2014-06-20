@@ -1,8 +1,10 @@
 class TasksController < ApplicationController
   layout "tasks"
+  helper_method :sort_column, :sort_direction
   before_filter :getTasks
 
   def index
+
   end
 
   def new
@@ -48,5 +50,16 @@ class TasksController < ApplicationController
 
   def getTasks
     @userTasks = Task.user_tasks(current_user.username)
+      .order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
+  end
+
+  private 
+
+  def sort_column
+    Task.column_names.include?(params[:sort]) ? params[:sort] : "taskname"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

@@ -3,8 +3,8 @@
     <table class="task_table">
       <tr>
         <td>#</td>   
-        <td>Task name</td>
-        <td>Description</td>
+        <td><%= sortable "taskname" %></td>
+        <td><%= sortable "description" %></td>
       </tr>
     <% @userTasks.each_with_index do |task, index| %>
       <tr>
@@ -13,7 +13,8 @@
        	<td><%= task.description %></td>
       </tr>
     <% end %>  	 
-    </table>	
+    </table>
+    <%= will_paginate @userTasks %>	
   <% else %>
     <span>No tasks found</span>
   <% end %>
