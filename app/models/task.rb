@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  belongs_to :user
   attr_accessible :description, :taskname, :username
 
   def self.user_tasks(username)
@@ -11,4 +12,4 @@ class Task < ActiveRecord::Base
   	end
   	return false 
   end
-end
+end 

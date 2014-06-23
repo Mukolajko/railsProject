@@ -13,9 +13,3 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-$(function(){
-	$("#tasks, .pagination ").on("click", "a", function(){
-		$.getScript(this.href);
-		return false;
-	});
-});
