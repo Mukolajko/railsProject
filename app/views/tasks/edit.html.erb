@@ -1,5 +1,11 @@
 <div>
-  <span>Current users in this task : <%= @users %></span><br />
+  <p>Current users in this task : 
+    <% for user in @users do %>
+      <% if current_user.username != user %>
+        <span><%= user %>(<%= link_to "remove", remove_user_path(current_user.id, @task.id, user)%>);</span>
+      <% end %>
+    <% end %>
+  </p>
   <button id="add_users">Add more users</button>
   <div class="hidden">
     <%= form_tag("/add_user") do %>
