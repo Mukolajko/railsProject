@@ -12,10 +12,24 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-tablesorter
 //= require_tree .
+
 
 $(document).ready(function(){
 	$("#add_users").click(function(){
 		$(".hidden").slideToggle();
+	});
+});
+
+$(function(){
+	$("#tasks").on('click', '.sort > a, .pagination > a', function(){
+		$("#flash_notice").remove();
+		$.getScript(this.href);
+		return false;
+	});
+	$("#task_table").tablesorter({
+		theme: 'blue',
+		widgets: ["zebra"]
 	});
 });

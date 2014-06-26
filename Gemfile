@@ -9,6 +9,7 @@ gem 'sqlite3'
 
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "will_paginate", "~> 3.0"
+gem 'jquery-tablesorter'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

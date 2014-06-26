@@ -1,22 +1,24 @@
-<div>
-  <% if @tasks %>
-    <table class="task_table">
+<%= link_to "Home page", user_path(current_user.id) %>
+<div id="all_tasks">
+	<table id="task_table" class="tablesorter">
+    <thead>
       <tr>
         <td>#</td>
-        <td><%= sortable "taskname" %></td>
-        <td><%= sortable "description" %></td>		
+        <td>Taskname</td>
+        <td>Description</td>	
+        <td>Usersintask</td>	
       </tr>
-  	  <% @tasks.each_with_index do |task, index|%>
-  	    <tr>
+    </thead>
+    <tbody>
+  	  <% @all_tasks.each_with_index do |task, index|%>
+        <tr>
       	  <td><%= index + 1 %></td>
       	  <td><%= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id) %></td>
       	  <td><%= task.description %></td>
-      	  <td><%= link_to "Delete", user_task_path(current_user.id, task.id), method: "delete", confirm: "Are you sure?" %></td>		
-        </tr>   
+      	  <td><%= task.usersintask %></td>      	
+        </tr> 
   	  <% end %>
-    </table>
-    <%= will_paginate @tasks %>
-  <% else %>
-    <span>You don't have any task</span>	
-  <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @all_tasks %>
 </div>

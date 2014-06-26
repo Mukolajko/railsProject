@@ -1,0 +1,10 @@
+<div id="main_nav">
+  <h1>Welcome <%= current_user.username %> Choose you options</h1>
+  <div>
+    <%= link_to "Add task", new_user_task_path(current_user.id) %>
+    <%= link_to "Show all tasks", tasks_path %>
+  </div>	
+</div>
+<div id="tasks">
+  <%= render 'usertasks' %>
+</div>

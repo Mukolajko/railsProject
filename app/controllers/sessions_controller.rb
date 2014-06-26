@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   	user = User.authenticate(params[:login], params[:password])
   	if user
   	  session[:user_id] = user.id
-  	  redirect_to user_tasks_path(user.id), :notice => "Logged In!"
+  	  redirect_to user_path(user.id), :notice => "Logged In!"
   	else
   	  flash.now.alert = "Incorrect data"
   	  render "new"

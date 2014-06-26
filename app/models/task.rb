@@ -4,4 +4,7 @@ class Task < ActiveRecord::Base
   has_many :users, :through => :sharedtasks
   attr_accessible :description, :taskname, :user_id
 
+  def usersintask
+  	@usersintask ||= users.map(&:username).join(",") 
+  end
 end 
