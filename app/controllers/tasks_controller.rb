@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_filter :get_task, :only => [:edit, :update, :destroy]
+  before_filter :select_options, :only => [:dragdrop]
 
   def index   
     @all_tasks = Task.includes(:users).paginate(:per_page => 10, :page => params[:page])
@@ -12,6 +13,7 @@ class TasksController < ApplicationController
   
   def create
     @task = current_user.tasks.create(params[:task])
+    @task.status = "new"
     if @task.save
       redirect_to user_path(current_user.id), :notice => "Add task to DB"
     else
@@ -43,6 +45,12 @@ class TasksController < ApplicationController
     end
   end
 
+  def dragdrop
+    if params[:taskname]
+      Task.find_by_taskname(params[:taskname]).update_attributes(status: params[:to])
+    end
+    @tasks = current_user.tasks
+  end
   private   
 
   def get_task

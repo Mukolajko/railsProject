@@ -3,6 +3,9 @@
   get "log_in" => "sessions#new", :as => "log_in"	
   get "sign_up" => "users#new", :as => "sign_up"
   get "/tasks" => "tasks#index", :as => "tasks"
+  get "/dragdrop" => "tasks#dragdrop"
+  get "/dragdrop/:taskname/:from/:to" => "tasks#dragdrop"
+
   post "add_user" => "users#add_user_to_task"
   get "/:user_id//:task_id/remove/(.:username)" => "users#remove_user_from_task", :as => "remove_user"
   root :to => "users#new"

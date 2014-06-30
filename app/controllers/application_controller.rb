@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_user, :find_user, :sort_direction, :sort_column
+  helper_method :select_options, :current_user, :find_user, :sort_direction, :sort_column
 
   private
 
@@ -20,4 +20,15 @@ class ApplicationController < ActionController::Base
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
+  def select_options
+    @select_options = [
+                        ["New", "new"], 
+                        ["In progress", "in progress"], 
+                        ["Fixed", "fixed"], 
+                        ["Qa", "qa"], 
+                        ["Done", "done"],
+                        ["Cannot reproduce", "cannot reproduce"],
+                        ["Close", "close"],
+                      ]
+  end
 end

@@ -6,7 +6,8 @@
         <td>#</td>
         <td>Taskname</td>
         <td>Description</td>	
-        <td>Usersintask</td>	
+        <td>Usersintask</td>
+        <td>Status</td>	
       </tr>
     </thead>
     <tbody>
@@ -15,7 +16,8 @@
       	  <td><%= index + 1 %></td>
       	  <td><%= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id) %></td>
       	  <td><%= task.description %></td>
-      	  <td><%= task.usersintask %></td>      	
+      	  <td><%= task.usersintask %></td>
+          <td><%= task.status %></td>        	
         </tr> 
   	  <% end %>
     </tbody>

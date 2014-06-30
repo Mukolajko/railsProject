@@ -29,6 +29,10 @@
       <%= par.label "Description" %><br />
       <%= par.text_area :description %>
     </p>
+    <p>
+      <%= par.label "Status" %>
+      <%= par.select(:status, select_options) %>
+    </p>
     <p class="button"><%= par.submit "Update task" %></p>
   <% end %> 
 </div>

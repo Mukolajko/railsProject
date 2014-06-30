@@ -12,6 +12,34 @@
  *= require jquery-tablesorter/theme.blue
  *= require_tree .
  */
+ #content {
+ 	width: 99%;
+ }
+ section {
+ 	display: inline-table;
+ 	width: 12%;
+ 	margin: 5px 5px;
+ }
+section > h3 {
+	word-wrap: break-word;
+	width: 100%;
+	height: 50px;
+	font-size: 20px;
+	border: 1px solid black; 
+}
+#content > section > div {
+	min-height: 500px;
+}
+#content > section > div > p {
+ 	border: 1px solid black;
+ 	font-size: 16px;
+ 	word-wrap: break-word; 
+ }
+
+ #main_nav {
+ 	margin: 10px 5px;
+ }
+
 .hidden {
 	display: none;
 }
