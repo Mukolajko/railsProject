@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require jquery.ui.draggable
 //= require jquery.ui.sortable
 //= require jquery-tablesorter
@@ -20,7 +21,7 @@
 
 $(document).ready(function(){
 	$("#add_users").click(function(){
-		$(".hidden").slideToggle();
+		$(".hide").slideToggle();
 	});
 });
 
@@ -31,14 +32,6 @@ $(function(){
 		$.getScript(this.href);
 		return false;
 	});
-	$("#default").on('click', function(){
-		$("#flash_notice").remove();
-		$.getScript(this.href);
-		return false;
-	});
-	$("#drugndrop").on('click', function(){
-		window.location.href = "/dragdrop"
-	});
 	//table sorter for all tasks
 	$("#task_table").tablesorter({
 		theme: 'blue',
@@ -48,22 +41,22 @@ $(function(){
 	$(".drop").sortable({
 		connectWith: ".drop",
 		receive: function (e, ui) {
-			var elem = ui.item.html()
-			var from = ui.sender.closest("section").attr("id");
-			var to = ui.item.closest("section").attr("id");
-			var url = "/dragdrop/" + elem + "/" + from + "/" + to
-			if (ui.sender.closest("section").next("section").attr("id") == to || ui.item.closest("section").next("section").attr("id") == from) {
-				$.ajax({
-					type: "GET",
-					url: url,
-					error: function(responce) {
+			var id = ui.item.attr("id").split("_")[1];
+			var status = ui.item.closest("section").attr("id");
+			var url = "tasks/" + id + "/" + status
+			$.ajax({
+				type: "GET",
+				url: url,
+				dataType: 'script',
+				success: function(response) {
+					if (response == "false") {
 						$(".drop").sortable("cancel");	
 					}
-				});
-			}
-			else {
-				$(".drop").sortable("cancel");	
-			}			
+				},
+				error: function(response) {
+					$(".drop").sortable("cancel");	
+				}
+			});		
 		}
 	});
 });

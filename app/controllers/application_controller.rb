@@ -23,11 +23,11 @@ class ApplicationController < ActionController::Base
   def select_options
     @select_options = [
                         ["New", "new"], 
-                        ["In progress", "in progress"], 
+                        ["In progress", "in_progress"], 
                         ["Fixed", "fixed"], 
                         ["Qa", "qa"], 
                         ["Done", "done"],
-                        ["Cannot reproduce", "cannot reproduce"],
+                        ["Cannot reproduce", "cannot_reproduce"],
                         ["Close", "close"],
                       ]
   end

@@ -1,12 +1,11 @@
 <div id="main_nav">
   <h1>Welcome <%= current_user.username %></h1>
   <h3>Choouse you view :
-  	<button id="default" class="button">Default</button>
-  	<button id="drugndrop" class="button">Drag n drop</button>
+  	<%= link_to "Show all tasks", tasks_path(:show => "all") %>
+  	<%= link_to "Edit your tasks", tasks_path %>
   </h3>
   <div>
     <%= link_to "Add task", new_user_task_path(current_user.id) %>
-    <%= link_to "Show all tasks", tasks_path %>
   </div>	
 </div>
 <div id="tasks">

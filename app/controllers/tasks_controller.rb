@@ -1,10 +1,14 @@
 class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_filter :get_task, :only => [:edit, :update, :destroy]
-  before_filter :select_options, :only => [:dragdrop]
+  before_filter :select_options, :only => [:index]
 
-  def index   
-    @all_tasks = Task.includes(:users).paginate(:per_page => 10, :page => params[:page])
+  def index
+    if params[:show] == "all"   
+      @all_tasks = Task.includes(:users).paginate(:per_page => 10, :page => params[:page])
+    else
+      @tasks = current_user.tasks
+    end
   end
 
   def new
@@ -45,12 +49,14 @@ class TasksController < ApplicationController
     end
   end
 
-  def dragdrop
-    if params[:taskname]
-      Task.find_by_taskname(params[:taskname]).update_attributes(status: params[:to])
+  def change_status
+    if params[:status]
+      @task = Task.find_by_id(params[:id])
+        render :json => @task.send(params[:status]) and return
     end
-    @tasks = current_user.tasks
   end
+
+
   private   
 
   def get_task

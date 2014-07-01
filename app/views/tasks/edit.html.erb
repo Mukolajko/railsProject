@@ -8,10 +8,10 @@
     <% end %>
   </p>
   <button id="add_users">Add more users</button>
-  <div class="hidden">
+  <div class="hide">
     <%= form_tag("/add_user") do %>
       <p>
-        <%= label_tag "Username" %><br />
+        <%= label_tag "Username" %>
         <%= text_field_tag "username" %>
         <%= hidden_field_tag "task_id", @task.id %>
       </p>
@@ -22,11 +22,11 @@
 <div>
   <%= form_for [current_user, @task] do |par| %>
     <p>
-      <%= par.label "Taskname" %><br />
+      <%= par.label "Taskname" %>
       <%= par.text_field :taskname %>
     </p>
     <p>
-      <%= par.label "Description" %><br />
+      <%= par.label "Description" %>
       <%= par.text_area :description %>
     </p>
     <p>
