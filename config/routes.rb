@@ -6,7 +6,7 @@
   get "/tasks/:id/:status" => "tasks#change_status", :as => "task_change"
   post "add_user" => "users#add_user_to_task"
   get "/:user_id/:task_id/remove/(.:username)" => "users#remove_user_from_task", :as => "remove_user"
-  root :to => "users#new"
+  root :to => "users#index"
   
   resources :users do
     resources :tasks 
