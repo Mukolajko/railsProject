@@ -18,16 +18,6 @@ ActiveRecord::Schema.define(:version => 20140627103700) do
     t.integer "task_id"
   end
 
-<<<<<<< HEAD
-=======
-  create_table "sharetasks", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "task_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
->>>>>>> 613c127b0b92748691676d3ef4d42239e552cce0
   create_table "tasks", :force => true do |t|
     t.integer  "user_id"
     t.string   "taskname"
