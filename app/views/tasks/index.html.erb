@@ -1,0 +1,44 @@
+<%= link_to "Home page", user_path(current_user.id) %>
+<% if @all_tasks %>
+  <div id="all_tasks">
+  	<table id="task_table" class="tablesorter">
+      <thead>
+        <tr>
+          <td>#</td>
+          <td>Taskname</td>
+          <td>Description</td>	
+          <td>Usersintask</td>
+          <td>Status</td>	
+        </tr>
+      </thead>
+      <tbody>
+    	  <% @all_tasks.each_with_index do |task, index|%>
+          <tr>
+        	  <td><%= index + 1 %></td>
+        	  <td><%= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id) %></td>
+        	  <td><%= task.description %></td>
+        	  <td><%= task.usersintask %></td>
+            <td><%= task.status %></td>        	
+          </tr> 
+    	  <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @all_tasks %>
+  </div>
+<% else %>
+  <%= link_to "refresh", tasks_path %>
+  <div id="content" >
+    <% @select_options.each do |value|%>
+      <section id="<%= value[1] %>">
+        <h5><%= value[0] %></h5>
+        <div class="drop">
+        <% @tasks.each do |task| %>
+          <% if task.status == value[1] %>
+            <p id="task_<%= task.id %>"><%= task.taskname %></p>
+          <% end %>
+        <% end %>
+        </div>
+      </section>
+    <% end %>
+  </div>
+<% end %>

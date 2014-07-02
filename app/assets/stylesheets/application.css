@@ -1,0 +1,72 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require jquery-tablesorter/theme.blue
+ *= require_tree .
+ */
+body {
+	padding-left: 10px;
+}
+label {
+ 	float: left;
+ 	margin: 5px 5px;
+ 	width: 80px;
+}
+
+ #content {
+ 	width: 99%;
+ }
+ section {
+ 	float: left;
+ 	width: 12%;
+ 	margin: 5px 5px;
+ }
+section > h5 {
+	width: 100%;
+	height: 40px;
+	font-size: 15px;
+	border: 1px solid black;
+	text-align: center; 
+}
+
+#content > section > div {
+	min-height: 500px;
+}
+#content > section > div > p {
+ 	border: 1px solid black;
+ 	font-size: 16px;
+ 	word-wrap: break-word; 
+ }
+
+ #main_nav {
+ 	margin: 10px 5px;
+ }
+
+.hide {
+	display: none;
+}
+td {
+	border: 1px solid black;
+}
+
+.task_table tr .current {
+	padding-right: 12px;
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
+.task_table tr .asc {
+	background-image: url(up_arrow.gif);
+}
+
+.task_table tr .desc {
+	background-image: url(down_arrow.gif);
+}

@@ -1,0 +1,13 @@
+<%= link_to "Home page", user_path(current_user.id) %>
+<%= form_for [current_user, @task] do |f| %>
+  <p>
+  	<%= f.label "Taskname" %>
+  	<%= f.text_field :taskname %>
+  </p>
+  <p>
+  	<%= f.label "Description" %>
+  	<%= f.text_area :description %>
+  </p>
+  <p class="button"><%= f.submit "Create task" %></p>
+<% end %> 
+
