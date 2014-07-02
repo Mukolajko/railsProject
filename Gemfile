@@ -5,8 +5,12 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+<<<<<<< HEAD
 # gem 'sqlite3'
 gem 'pg'
+=======
+gem 'sqlite3'
+>>>>>>> 613c127b0b92748691676d3ef4d42239e552cce0
 
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "will_paginate", "~> 3.0"
