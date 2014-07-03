@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def index
     if params[:search]
-      @tasks = current_user.tasks.where("taskname = ? OR description = ?", params[:search], params[:search])
+      @tasks = current_user.tasks.where("taskname LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
       if @tasks.first
         return
       else
@@ -36,11 +36,11 @@ class UsersController < ApplicationController
     @user_to_add = find_user(params[:username])
     @check_for_duplicates = Sharedtask.where("user_id = ? AND task_id = ?", @user_to_add, params[:task_id]).first
     if @check_for_duplicates != nil || @user_to_add == nil
-      redirect_to edit_user_task_path(current_user.id, params[:task_id]), :notice => "User already in task or user doesn't exist"
+      redirect_to :back, :notice => "User already in task or user doesn't exist"
     else
       @user = User.find_by_id(@user_to_add)
       @user.sharedtasks.create user_id: @user_to_add, task_id: params[:task_id]
-      redirect_to edit_user_task_path(current_user.id,params[:task_id]), :notice => "User add in task!"  
+      redirect_to :back, :notice => "Add to task!"
     end
   end
 

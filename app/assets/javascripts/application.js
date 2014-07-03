@@ -27,17 +27,11 @@ $(document).ready(function(){
 
 $(function(){
 	// sort and load user tasks
-	$("#tasks").on('click', '.sort > a, .pagination > a', function(){
+	$("#all_tasks, #tasks").on('click', '.sort > a, .pagination > a', function(){
 		$("#flash_notice").remove();
 		$.getScript(this.href);
 		return false;
 	});
-	//table sorter for all tasks
-	$("#task_table").tablesorter({
-		theme: 'blue',
-		widgets: ["zebra"]
-	});
-
 	$(".drop").sortable({
 		connectWith: ".drop",
 		receive: function (e, ui) {

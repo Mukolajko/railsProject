@@ -63,3 +63,13 @@ label {
 .hide {
 	display: none;
 }
+
+.asc:after {
+	content: url(up_arrow.gif);
+	padding-left: 5px;
+}
+
+.desc:after {
+	content: url(down_arrow.gif);
+	padding-left: 5px;
+}

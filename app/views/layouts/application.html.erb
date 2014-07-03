@@ -20,8 +20,8 @@
           <ul class="nav">
             <% if current_user %>
               <li><%= link_to "Home page", user_path(current_user.id) %></li>
-              <li><%= link_to "Show all tasks", tasks_path(:show => "all") %></li>
-              <li><%= link_to "Edit your tasks", tasks_path %></li>
+              <li><%= link_to "Show all tasks", user_tasks_path(current_user.id) %></li>
+              <li><%= link_to "Edit your tasks", edit_tasks_path %></li>
               <li><%= link_to "Add task", new_user_task_path(current_user.id) %></li>
               <%= form_tag  root_url, :class => "navbar-search" do %>
                 <%= text_field_tag :search, params[:search], :class => "search-query", :placeholder => "Search" %>

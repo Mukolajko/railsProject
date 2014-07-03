@@ -1,19 +1,19 @@
-    <table class="table">
-      <tr>
-        <td>#</td>
-        <td class="sort"><%= sortable "taskname" %></td>
-        <td class="sort"><%= sortable "description" %></td>
-        <td class="sort"><%= sortable "status" %></td>
-        <td >Action</td>   		
-      </tr>
-  	  <% @tasks.each_with_index do |task, index|%>
-  	    <tr>
-      	  <td><%= index + 1 %></td>
-      	  <td><%= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id) %></td>
-      	  <td><%= task.description %></td>
-          <td><%= task.status %></td>
-      	  <td><%= link_to "Delete", user_task_path(current_user.id, task.id), method: "delete", confirm: "Are you sure?" %></td>
-        </tr> 
-  	  <% end %>
-    </table>
-    <%= will_paginate @tasks %>
+<table class="table">
+  <tr>
+    <td>#</td>
+    <td class="sort"><%= sortable "taskname" %></td>
+    <td class="sort"><%= sortable "description" %></td>
+    <td class="sort"><%= sortable "status" %></td>
+    <td >Action</td>   		
+  </tr>
+  <% @tasks.each_with_index do |task, index|%>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id) %></td>
+      <td><%= task.description %></td>
+      <td><%= task.status %></td>
+      <td><%= link_to "Delete", user_task_path(current_user.id, task.id), method: "delete", confirm: "Are you sure?" %></td>
+    </tr> 
+  <% end %>
+</table>
+<%= will_paginate @tasks %>

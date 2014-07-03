@@ -1,0 +1,15 @@
+<%= link_to "refresh", edit_tasks_path %>
+<div id="content" >
+  <% @select_options.each do |value|%>
+    <div id="<%= value[1] %>" class="thumbnail">
+      <h5><%= value[0] %></h5>
+      <div class="drop">
+      <% @tasks.each do |task| %>
+        <% if task.status == value[1] %>
+          <p id="task_<%= task.id %>"><%= task.taskname %></p>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
