@@ -1,4 +1,17 @@
 class UsersController < ApplicationController
+  def index
+    if params[:search]
+      @tasks = current_user.tasks.where("taskname = ? OR description = ?", params[:search], params[:search])
+      if @tasks.first
+        return
+      else
+        @tasks = nil
+      end
+    else
+      @no_query = true
+    end
+  end
+
   def new
   	@user = User.new
   end

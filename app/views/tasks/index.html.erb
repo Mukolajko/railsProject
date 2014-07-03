@@ -28,7 +28,7 @@
   <%= link_to "refresh", tasks_path %>
   <div id="content" >
     <% @select_options.each do |value|%>
-      <section id="<%= value[1] %>">
+      <div id="<%= value[1] %>" class="thumbnail">
         <h5><%= value[0] %></h5>
         <div class="drop">
         <% @tasks.each do |task| %>
@@ -37,7 +37,7 @@
           <% end %>
         <% end %>
         </div>
-      </section>
+      </div>
     <% end %>
   </div>
 <% end %>

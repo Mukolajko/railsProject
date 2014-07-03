@@ -23,27 +23,37 @@ label {
 
  #content {
  	width: 99%;
+	box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
  }
- section {
+
+#content > div {
  	float: left;
  	width: 12%;
- 	margin: 5px 5px;
  }
-section > h5 {
+#content > div > h5 {
 	width: 100%;
 	height: 40px;
 	font-size: 15px;
-	border: 1px solid black;
-	text-align: center; 
+	border-bottom: 2px solid black;
+	text-align: center;
 }
 
-#content > section > div {
+#content > div > div {
+	background-color: #FAFAFA;
+	background-image: linear-gradient(to bottom, #FFF, #F2F2F2);
 	min-height: 500px;
 }
-#content > section > div > p {
- 	border: 1px solid black;
- 	font-size: 16px;
- 	word-wrap: break-word; 
+#content > div > div > p {
+	font-size: 16px;
+ 	word-wrap: break-word;
+ 	text-align: center;
+}
+#content > div > div > p:nth-child(even) {
+ 	background-color: #CFDCE6; 
+ }
+
+ #content > div > div > p:nth-child(odd) {
+ 	background-color: #DBDDDD; 
  }
 
  #main_nav {
@@ -52,21 +62,4 @@ section > h5 {
 
 .hide {
 	display: none;
-}
-td {
-	border: 1px solid black;
-}
-
-.task_table tr .current {
-	padding-right: 12px;
-	background-repeat: no-repeat;
-	background-position: right center;
-}
-
-.task_table tr .asc {
-	background-image: url(up_arrow.gif);
-}
-
-.task_table tr .desc {
-	background-image: url(down_arrow.gif);
 }

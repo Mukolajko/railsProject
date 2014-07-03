@@ -1,0 +1,26 @@
+<% if @tasks %>
+  <table id="task_table" class="tablesorter">
+    <thead>
+      <tr>
+        <td>#</td>
+        <td>Taskname</td>
+        <td>Description</td>	
+        <td>Usersintask</td>
+        <td>Status</td>	
+      </tr>
+    </thead>
+    <tbody>
+   	  <% @tasks.each_with_index do |task, index|%>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id) %></td>
+          <td><%= task.description %></td>
+          <td><%= task.usersintask %></td>
+          <td><%= task.status %></td>        	
+        </tr> 
+      <% end %>
+    </tbody>
+  </table>
+<% elsif !@no_query %>
+  <span>Nothing found for : <%= params[:search] %></span>
+<% end %>

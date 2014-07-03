@@ -42,7 +42,7 @@ $(function(){
 		connectWith: ".drop",
 		receive: function (e, ui) {
 			var id = ui.item.attr("id").split("_")[1];
-			var status = ui.item.closest("section").attr("id");
+			var status = ui.item.closest(".thumbnail").attr("id");
 			var url = "tasks/" + id + "/" + status
 			$.ajax({
 				type: "GET",

@@ -1,9 +1,10 @@
-    <table id="tada" class="task_table">
+    <table class="table">
       <tr>
         <td>#</td>
         <td class="sort"><%= sortable "taskname" %></td>
         <td class="sort"><%= sortable "description" %></td>
-        <td class="sort"><%= sortable "status" %></td> 		
+        <td class="sort"><%= sortable "status" %></td>
+        <td >Action</td>   		
       </tr>
   	  <% @tasks.each_with_index do |task, index|%>
   	    <tr>

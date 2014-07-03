@@ -146,9 +146,6 @@ DEPENDENCIES
   pry
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
-  pry
-  rails (= 3.2.13)
-  sass-rails (~> 3.2.3)
   state_machine (~> 1.2.0)
   therubyracer
   touchpunch-rails
