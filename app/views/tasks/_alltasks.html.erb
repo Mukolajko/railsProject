@@ -10,7 +10,7 @@
     	  <% @all_tasks.each_with_index do |task, index|%>
           <tr>
         	  <td><%= index + 1 %></td>
-        	  <td><%= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id) %></td>
+        	  <td><%= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id), :class => "#{task.taskname}" %><span class="pull-right"><i class="icon-question-sign"></i></span></td>
         	  <td><%= task.description %></td>
             <td><%= task.status %></td>
         	  <td><%= task.usersintask %></td>

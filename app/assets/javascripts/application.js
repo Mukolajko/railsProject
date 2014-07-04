@@ -12,20 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.dialog
+//= require jquery.ui.effect-explode
+//= require jquery.ui.effect-blind
 //= require twitter/bootstrap
-//= require jquery.ui.draggable
 //= require jquery.ui.sortable
-//= require jquery-tablesorter
 //= require_tree .
 
+$(function(){
 
-$(document).ready(function(){
 	$("#add_users").click(function(){
 		$(".hide").slideToggle();
 	});
-});
-
-$(function(){
 	// sort and load user tasks
 	$("#all_tasks, #tasks").on('click', '.sort > a, .pagination > a', function(){
 		$("#flash_notice").remove();
@@ -52,5 +50,27 @@ $(function(){
 				}
 			});		
 		}
+	});
+
+	$(".table").on('click', 'span',function(){
+		var taskname = $(this).parent().find("a").attr("class");
+		var modalWindow = $(document.createElement('div'))
+		modalWindow.attr('title', "Show users in task")
+		$.ajax({
+			url: "/modal/" + taskname,
+			success: function(response) {
+				modalWindow.append(response)
+			}
+		})
+		modalWindow.dialog({
+			show: {
+				effect: "blind",
+				duration: 1000
+			},
+			hide: {
+				effect: "explode",
+				duration: 1000
+			}
+		}).dialog("open")
 	});
 });

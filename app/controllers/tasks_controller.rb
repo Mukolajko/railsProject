@@ -57,6 +57,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def modal
+    @task = Task.find_by_taskname(params[:taskname]).sharedtasks
+    @users = []
+    for el in @task
+      @users << User.find_by_id(el["user_id"]).username
+    end
+    render layout: false
+  end
 
   private   
 
