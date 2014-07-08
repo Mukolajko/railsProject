@@ -10,10 +10,14 @@
     	  <% @all_tasks.each_with_index do |task, index|%>
           <tr>
         	  <td><%= index + 1 %></td>
-        	  <td><%= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id), :class => "#{task.taskname}" %><span class="pull-right"><i class="icon-question-sign"></i></span></td>
+        	  <td><%= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id), :class => "#{task.taskname}" %></td>
         	  <td><%= task.description %></td>
             <td><%= task.status %></td>
-        	  <td><%= task.usersintask %></td>
+        	  <td>
+            <% for user in task.usersintask do%>    
+              <%= link_to user.username + ";", show_user_path(user.id) %>
+            <% end %>
+            </td>
             <td><%= link_to "Add task", add_user_path(:username => current_user.username, :task_id => task.id), :method => "POST" %></td> 
           </tr> 
     	  <% end %>

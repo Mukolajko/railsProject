@@ -12,9 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.dialog
-//= require jquery.ui.effect-explode
-//= require jquery.ui.effect-blind
 //= require twitter/bootstrap
 //= require jquery.ui.sortable
 //= require_tree .
@@ -30,8 +27,10 @@ $(function(){
 		$.getScript(this.href);
 		return false;
 	});
+	//sortable functional plus change status in DB
 	$(".drop").sortable({
 		connectWith: ".drop",
+		axis: "x",
 		receive: function (e, ui) {
 			var id = ui.item.attr("id").split("_")[1];
 			var status = ui.item.closest(".thumbnail").attr("id");
@@ -51,26 +50,26 @@ $(function(){
 			});		
 		}
 	});
-
-	$(".table").on('click', 'span',function(){
-		var taskname = $(this).parent().find("a").attr("class");
-		var modalWindow = $(document.createElement('div'))
-		modalWindow.attr('title', "Show users in task")
+	//open and add content to modal window
+	$(document).on('click', '.modal-window-open',function(event){
+		event.preventDefault();
+		var taskId = $(this).attr("href").split("/")[4];
 		$.ajax({
-			url: "/modal/" + taskname,
+			url: "/modal/" + taskId,
 			success: function(response) {
-				modalWindow.append(response)
-			}
-		})
-		modalWindow.dialog({
-			show: {
-				effect: "blind",
-				duration: 1000
+				$(".modal-body").html(response);
 			},
-			hide: {
-				effect: "explode",
-				duration: 1000
+			error: function(){
+				$(".modal-body").html("Sorry");
 			}
-		}).dialog("open")
+		});
+		$(".modal").modal("show");
 	});
+	// open popover and close all opened
+	$(".popover-open").popover({
+			html: 'true',
+	});
+	$(".popover-open").click(function(){
+		$(".popover-open").not(this).popover('hide');
+	})
 });

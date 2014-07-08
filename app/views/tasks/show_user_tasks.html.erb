@@ -6,10 +6,35 @@
       <div class="drop">
       <% @tasks.each do |task| %>
         <% if task.status == value[1] %>
-          <p id="task_<%= task.id %>"><%= task.taskname %></p>
+          <p id="task_<%= task.id %>" class="user_tasks">
+            <span ><%= task.taskname %></span>
+            <span>
+              <%= link_to "Edit", edit_user_task_path(current_user.id, task.id), :class => "modal-window-open" %>
+              <a class="popover-open pull-right" data-toggle="popover" title="Users in task" 
+              data-content='<% for users in @shared_users_id[task.taskname] do %>
+                              <%= link_to users[1], show_user_path(users[0])%>
+                            <% end %>
+                            '>
+                <%= @shared_users_count[task.taskname]%>
+              </a>
+            </span>
+          </p>
         <% end %>
       <% end %>
       </div>
     </div>
   <% end %>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+        <h4>Edit task</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
 </div>

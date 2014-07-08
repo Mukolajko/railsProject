@@ -9,7 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require jquery.ui.dialog
  *= require_tree .
  */
 body {
@@ -45,16 +44,27 @@ label {
 }
 #content > div > div > p {
 	font-size: 16px;
- 	word-wrap: break-word;
- 	text-align: center;
 }
-#content > div > div > p:nth-child(even) {
- 	background-color: #CFDCE6; 
+.user_tasks > span {
+	float: left;
+	width: 99%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: "";
+	padding: 1% 1%;
+}
+.user_tasks > span > a {
+	padding: 0px 5px;
+}
+.user_tasks > span > a:nth-child(odd) {
+	float: left;
+}
+.user_tasks > span:nth-child(even) {
+ 	background-color: #CFDCE6;
+ 	margin-bottom: 2px; 
+ 	border-bottom: 1px dashed black;
  }
-
- #content > div > div > p:nth-child(odd) {
- 	background-color: #DBDDDD; 
- }
+ 	
 
  #main_nav {
  	margin: 10px 5px;
@@ -72,8 +82,4 @@ label {
 .desc:after {
 	content: url(down_arrow.gif);
 	padding-left: 5px;
-}
-
-span.pull-right:hover {
-	cursor: help;
 }

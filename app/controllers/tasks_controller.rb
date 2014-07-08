@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_filter :select_options, :only => [:show_user_tasks]
 
   def index
-    @all_tasks = Task.includes(:users)
+      @all_tasks = Task.includes(:users)
                     .order("#{sort_column} #{sort_direction}")
                     .paginate(:per_page => 10, :page => params[:page])
   end
@@ -33,9 +33,9 @@ class TasksController < ApplicationController
 
   def update
     if @task.update_attributes(params[:task])
-      redirect_to user_path(current_user.id), :notice => "Task updated"
+      redirect_to :back, :notice => "Task updated"
     else
-      redirect_to user_path(current_user.id), :notice => "Something went wrong. Try again!"  
+      redirect_to :back, :notice => "Something went wrong. Try again!"  
     end
   end
 
@@ -48,6 +48,15 @@ class TasksController < ApplicationController
   end
   def show_user_tasks
     @tasks = current_user.tasks
+    @shared_users_count = Hash.new
+    @shared_users_id = Hash.new
+    for task in @tasks
+      @shared_users_count[task.taskname], @shared_users_id[task.taskname] = 0, []
+      for user in task.usersintask
+        @shared_users_id[task.taskname] << [user.id, user.username]
+        @shared_users_count[task.taskname] += 1
+      end
+    end
   end
 
   def change_status
@@ -58,11 +67,8 @@ class TasksController < ApplicationController
   end
 
   def modal
-    @task = Task.find_by_taskname(params[:taskname]).sharedtasks
-    @users = []
-    for el in @task
-      @users << User.find_by_id(el["user_id"]).username
-    end
+    @task = Task.find_by_id(params[:id])
+    
     render layout: false
   end
 

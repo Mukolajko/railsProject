@@ -5,7 +5,7 @@ class Task < ActiveRecord::Base
   attr_accessible :description, :taskname, :user_id, :status
 
   def usersintask
-  	@usersintask ||= users.map(&:username).join(",") 
+  	@usersintask ||= users
   end
 
   state_machine :status, :initial => :new do
