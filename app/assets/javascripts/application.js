@@ -15,12 +15,8 @@
 //= require twitter/bootstrap
 //= require jquery.ui.sortable
 //= require_tree .
-
+ 
 $(function(){
-
-	$("#add_users").click(function(){
-		$(".hide").slideToggle();
-	});
 	// sort and load user tasks
 	$("#all_tasks, #tasks").on('click', '.sort > a, .pagination > a', function(){
 		$("#flash_notice").remove();
@@ -30,7 +26,6 @@ $(function(){
 	//sortable functional plus change status in DB
 	$(".drop").sortable({
 		connectWith: ".drop",
-		axis: "x",
 		receive: function (e, ui) {
 			var id = ui.item.attr("id").split("_")[1];
 			var status = ui.item.closest(".thumbnail").attr("id");
@@ -73,3 +68,32 @@ $(function(){
 		$(".popover-open").not(this).popover('hide');
 	})
 });
+
+function add_user_field(link, assosiation, content){
+	var new_id = new Date().getTime();
+	var regexp = new RegExp("new_" + assosiation, "g");
+	$(link).parent().before(content.replace(regexp, new_id))
+}
+
+function remove_user_field(link){
+	$(link).prev().val(1)
+	$(link).parent().hide();
+}
+
+function remove_user_from_task(link, taskId, username) {
+	$.ajax({
+		url: "/remove/" + taskId + "/" + username,
+		success: function(response) {
+			if (response != "false") {
+				$(link).parent().hide();
+				$(link).parent().parent().before("Removed");	
+			}
+			else {
+				$(link).parent().parent().before("Something bad happened");
+			}
+		},
+		error: function(){
+			$(link).parent().parent().before("Something bad happened");
+		}
+	});
+}

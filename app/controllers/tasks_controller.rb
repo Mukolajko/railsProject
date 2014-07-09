@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
-  before_filter :get_task, :only => [:edit, :update, :destroy]
+  before_filter :get_task, :only => [:edit, :update, :destroy, :modal]
+  before_filter :get_shared_tasks, :only => [:edit, :modal]
+  before_filter :all_users, :only => [:edit, :modal, :new]
   before_filter :select_options, :only => [:show_user_tasks]
 
   def index
@@ -11,6 +13,8 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    shared = @task.sharedtasks.build
+    render '_taskform'
   end
   
   def create
@@ -20,14 +24,6 @@ class TasksController < ApplicationController
       redirect_to user_path(current_user.id), :notice => "Add task to DB"
     else
       redirect_to user_path(current_user.id), :notice => "Something went wrong. Try again!"
-    end
-  end
-
-  def edit
-    @taskusers = @task.sharedtasks
-    @users = []
-    for el in @taskusers
-      @users << User.find_by_id(el["user_id"]).username
     end
   end
 
@@ -46,6 +42,7 @@ class TasksController < ApplicationController
       redirect_to user_path(current_user.id), :notice => "Something went wrong. Try again!"
     end
   end
+
   def show_user_tasks
     @tasks = current_user.tasks
     @shared_users_count = Hash.new
@@ -67,14 +64,20 @@ class TasksController < ApplicationController
   end
 
   def modal
-    @task = Task.find_by_id(params[:id])
-    
-    render layout: false
+    render "_taskform"
   end
 
   private   
 
   def get_task
     @task = Task.find_by_id(params[:id])
+  end
+
+  def get_shared_tasks
+    @taskusers = @task.sharedtasks
+    @users = []
+    for el in @taskusers
+      @users << User.find_by_id(el["user_id"]).username
+    end
   end
 end

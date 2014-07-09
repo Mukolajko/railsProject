@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :select_options, :current_user, :find_user, :sort_direction, :sort_column
+  helper_method :all_users, :select_options, :current_user, :find_user, :sort_direction, :sort_column
 
   private
 
@@ -30,5 +30,14 @@ class ApplicationController < ActionController::Base
                         ["Cannot reproduce", "cannot_reproduce"],
                         ["Close", "close"],
                       ]
+  end
+
+  def all_users
+    @all_users = []
+    User.all.each do |user|
+      if current_user.id != user.id 
+        @all_users << ["#{user.username}", user.id]
+      end
+    end
   end
 end

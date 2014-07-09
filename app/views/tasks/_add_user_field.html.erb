@@ -1,0 +1,6 @@
+<p class="user_to_task">
+  <%= f.label :user_id, "Username" %>
+  <%= f.select(:user_id, @all_users) %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to_function "remove", "remove_user_field(this)" %> 
+</p>
