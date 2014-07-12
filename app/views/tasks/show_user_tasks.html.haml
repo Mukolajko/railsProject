@@ -10,9 +10,8 @@
               %span= task.taskname
               %span
                 = link_to "Edit", edit_user_task_path(current_user.id, task.id), :class => "modal-window-open"
-                %a.popover-open.pull-right{"data-content" => "<haml:silent> for users in @shared_users_id[task.taskname] do </haml:silent><haml:block>
-                              #{link_to users[1], show_user_path(users[0])}
-</haml:block>                            ", "data-toggle" => "popover", :title => "Users in task"}
+                %a.popover-open.pull-right{"data-content" => "need HELP!", 
+                  "data-toggle" => "popover", :title => "Users in task"}
                   = @shared_users_count[task.taskname]
 .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModal", :role => "dialog", :tabindex => "-1"}
   .modal-dialog.modal-sm
