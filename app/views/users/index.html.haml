@@ -1,0 +1,20 @@
+- if @tasks
+  %table.table
+    %thead
+      %tr
+        %td #
+        %td Taskname
+        %td Description
+        %td Usersintask
+        %td Status
+    %tbody
+      - @tasks.each_with_index do |task, index|
+        %tr
+          %td= index + 1
+          %td= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id)
+          %td= task.description
+          %td= task.usersintask
+          %td= task.status
+- elsif !@no_query
+  %span
+    Nothing found for : #{params[:search]}

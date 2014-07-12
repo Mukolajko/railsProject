@@ -1,0 +1,15 @@
+%table.table
+  %tr
+    %td #
+    %td.sort= sortable "taskname"
+    %td.sort= sortable "description"
+    %td.sort= sortable "status"
+    %td Action
+  - @tasks.each_with_index do |task, index|
+    %tr
+      %td= index + 1
+      %td= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id)
+      %td= task.description
+      %td= task.status
+      %td= link_to "Delete", user_task_path(current_user.id, task.id), method: "delete", confirm: "Are you sure?"
+= will_paginate @tasks

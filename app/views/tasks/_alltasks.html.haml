@@ -1,0 +1,17 @@
+%table.table
+  %tr
+    %td #
+    %td.sort= sortable "taskname"
+    %td.sort= sortable "description"
+    %td.sort= sortable "status"
+    %td Usersintask
+  - @all_tasks.each_with_index do |task, index|
+    %tr
+      %td= index + 1
+      %td= link_to "#{task.taskname}", edit_user_task_path(current_user.id, task.id), :class => "#{task.taskname}"
+      %td= task.description
+      %td= task.status
+      %td
+        - for user in task.usersintask do
+          = link_to user.username + ";", show_user_path(user.id)
+= will_paginate @all_tasks

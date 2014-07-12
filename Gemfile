@@ -15,6 +15,8 @@ gem 'touchpunch-rails'
 gem "state_machine", "~> 1.2.0"
 gem 'twitter-bootstrap-rails'
 gem 'less-rails'
+gem "haml-rails", '>= 0.3.4', :group => :development
+gem 'html2haml'
 # Gems used only for assets and not required
 # in production environments by default.
   gem 'jquery-rails'
@@ -26,7 +28,7 @@ gem 'less-rails'
   gem 'therubyracer', :platforms => :ruby
 
 group :test, :development do
-	gem "pry", :require => "pry"
+  gem "pry", :require => "pry"
   gem "rspec-rails"
 end
 

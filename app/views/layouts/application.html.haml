@@ -1,0 +1,39 @@
+!!!
+%html
+  %head
+    %title RailsProject
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-fixed-top.navbar-inverse
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{:href => root_url} Rails APP
+          .nav-collapse
+            %ul.nav
+              - if current_user
+                %li= link_to "Home page", user_path(current_user.id)
+                %li= link_to "Show all tasks", user_tasks_path(current_user.id)
+                %li= link_to "Edit your tasks", edit_tasks_path
+                %li= link_to "Add task", new_user_task_path(current_user.id)
+                %li= link_to "My profile", edit_user_path(current_user.id)
+                = form_tag  root_url, :class => "navbar-search", :method => "GET" do
+                  = text_field_tag :search, params[:search], :class => "search-query", :placeholder => "Search"
+                %li.pull-right= link_to "Log Out", log_out_path
+              - else
+                %li= link_to "Sign up", sign_up_path
+                %li= link_to "Log in", log_in_path
+    .container
+      .row
+        .span10
+          - flash.each do |name, msg|
+            = content_tag :div, msg, :id => "flash_#{name}"
+          = yield
+        .span2
+          %h2 Right side bar
+          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
