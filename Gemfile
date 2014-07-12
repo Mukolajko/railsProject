@@ -17,7 +17,7 @@ gem 'twitter-bootstrap-rails'
 gem 'less-rails'
 gem "haml-rails", '>= 0.3.4', :group => :development
 gem "haml", '>= 2.2.0'
-gem 'html2haml'
+gem 'html2haml' 
 # Gems used only for assets and not required
 # in production environments by default.
   gem 'jquery-rails'

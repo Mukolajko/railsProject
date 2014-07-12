@@ -165,6 +165,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   coffee-rails (~> 4.0.0)
+  haml (>= 2.2.0)
   haml-rails (>= 0.3.4)
   html2haml
   jquery-rails
