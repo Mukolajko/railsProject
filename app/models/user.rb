@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   has_many :sharedtasks
   has_many :tasks, :through => :sharedtasks
-  attr_accessible :username, :email, :password, :password_confirmation
   attr_accessor :password	
 
   before_save :encrypt_password

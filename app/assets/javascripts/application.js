@@ -66,34 +66,48 @@ $(function(){
 	});
 	$(".popover-open").click(function(){
 		$(".popover-open").not(this).popover('hide');
-	})
+	});
+	//add user to task and check on duplicates
+	$(document).on('change','select',function(){
+		var new_id = new Date().getTime();
+		var username = $(this).find("option:selected").text();
+		var check = true
+		$(this).parent().next().find("p").each(function(){
+			if ($(this).attr("class") == username) {
+				check = false
+				return false;
+			}
+		});
+		if (check) {
+			$(this).parent().next().append(
+				"<p class='"+username+"'><input type='hidden' name='task[sharedtasks_attributes]["+new_id+"][user_id]' value='"+$(this).val()+"'/>"+username+"(<a href='#' onclick='remove_this_user(this)'>remove</a>);</p>"
+			);
+		}
+
+	});
 });
-
-function add_user_field(link, assosiation, content){
-	var new_id = new Date().getTime();
-	var regexp = new RegExp("new_" + assosiation, "g");
-	$(link).parent().before(content.replace(regexp, new_id))
-}
-
-function remove_user_field(link){
-	$(link).prev().val(1)
-	$(link).parent().hide();
-}
-
+//remove user from db
 function remove_user_from_task(link, taskId, username) {
 	$.ajax({
 		url: "/remove/" + taskId + "/" + username,
 		success: function(response) {
 			if (response != "false") {
 				$(link).parent().hide();
-				$(link).parent().parent().before("Removed");	
+				$(document).find(".edit_task").before("<p class='message'>Removed</p>");
+				$(document).find(".message").fadeOut(600, function(){
+					$(this).remove();
+				});
 			}
 			else {
-				$(link).parent().parent().before("Something bad happened");
+				$(document).find(".edit_task").before("<p>Something bad happened</p>");
 			}
 		},
 		error: function(){
-			$(link).parent().parent().before("Something bad happened");
+			$(document).find(".edit_task").before("<p>Something bad happened</p>");
 		}
 	});
+}
+//remove user untill transaction
+function remove_this_user(link){
+	$(link).parent().remove();
 }

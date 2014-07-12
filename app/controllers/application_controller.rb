@@ -34,6 +34,7 @@ class ApplicationController < ActionController::Base
 
   def all_users
     @all_users = []
+     @all_users << ["", 0]
     User.all.each do |user|
       if current_user.id != user.id 
         @all_users << ["#{user.username}", user.id]

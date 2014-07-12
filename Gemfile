@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.0.rc1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -13,23 +13,21 @@ gem "will_paginate", "~> 3.0"
 gem 'jquery-tablesorter'
 gem 'touchpunch-rails'
 gem "state_machine", "~> 1.2.0"
+gem 'twitter-bootstrap-rails'
+gem 'less-rails'
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
   gem 'jquery-rails'
   gem 'jquery-ui-rails'
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'twitter-bootstrap-rails'
-  
+  gem 'sass-rails',   '~> 4.0.0.rc1'
+  gem 'coffee-rails', '~> 4.0.0'
+  gem 'uglifier', '>= 1.3.0'  
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
-  gem 'less-rails'
-  gem 'uglifier', '>= 1.0.3'
-end
 
 group :test, :development do
 	gem "pry", :require => "pry"
+  gem "rspec-rails"
 end
 
 

@@ -1,14 +1,3 @@
-<% if params[:action] != "new" %>
-  <div>
-  <p>Current users in this task : 
-    <% for user in @users do %>
-      <% if current_user.username != user %>
-        <span class="user_name"><%= user %>(<%= link_to_function "remove", "remove_user_from_task(this, #{@task.id}, '#{user}')"%>);</span>
-      <% end %>
-    <% end %>
-  </p>
-  </div>
-<% end %>
 <%= form_for [current_user, @task] do |f| %>
   <p>
     <%= f.label "Taskname" %>
@@ -17,11 +6,20 @@
   <p>
     <%= f.label "Description" %>
     <%= f.text_area :description %>
-  </p>
-  <p><%= link_to_add_user "Add user", f, :sharedtasks %></p>
-  <% if params[:action] == "new" %>
+  </p> 
+  <%= render 'add_user_field' %> 
+  <% if params[:action] == "new" %>   
+    <div class="current_users">Current users in this task : 
+    </div>
     <p class="button"><%= f.submit "Create task" %></p>
   <% else %>
+    <div class="current_users">Current users in this task : 
+      <% for user in @taskusers do %>
+        <% if current_user.username != user.username %>
+          <p class="<%= user.username %>"><%= user.username %>(<%= link_to_function "remove", "remove_user_from_task(this, #{@task.id}, '#{user.username}')"%>);</p>
+        <% end %>
+      <% end %>
+    </div>
     <p class="button"><%= f.submit "Update task" %></p>
   <% end %>
 <% end %> 
