@@ -46,7 +46,8 @@ class TasksController < ApplicationController
     for task in @tasks
       @shared_users_count[task.taskname], @shared_users_id[task.taskname] = 0, []
       for user in task.usersintask
-        @shared_users_id[task.taskname] << [user.id, user.username]
+        user_link = view_context.link_to("#{user.username} ", show_user_path(user.id))
+        @shared_users_id[task.taskname] << user_link
         @shared_users_count[task.taskname] += 1
       end
     end
