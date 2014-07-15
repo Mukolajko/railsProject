@@ -84,7 +84,7 @@ $(function(){
 			);
 		}
 
-	});
+	}); 
 	//show task in rightside bar
 	$(document).on('click', 'span.taskname', function(){
 		var taskID = $(this).parent().attr("id").split("_")[1];
