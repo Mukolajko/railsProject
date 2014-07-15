@@ -19,7 +19,6 @@
   end
   
   def create
-    binding.pry
     if params[:task][:sharedtasks_attributes] != nil
       params[:task][:sharedtasks_attributes] = check_for_duplicates(params[:task][:sharedtasks_attributes])
     end
