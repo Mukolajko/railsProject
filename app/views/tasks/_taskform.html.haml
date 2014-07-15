@@ -5,11 +5,11 @@
   %p
     = f.label "Description"
     = f.text_area :description
+  %p
+    = f.label :task_type, "Task type"
+    = f.select(:task_type, options_for_select([["Bug", "bug"],["Task", "list"]]))
   = render 'add_user_field'
   - if params[:action] == "new"
-    %p
-      = f.label :task_type, "Task type"
-      = f.select(:task_type, options_for_select([["Bug", "bug"],["Task", "list"]]))
     .current_users
       Current users in this task :
     %p.button= f.submit "Create task"
