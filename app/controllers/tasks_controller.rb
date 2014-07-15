@@ -1,4 +1,5 @@
-class TasksController < ApplicationController
+ class TasksController < ApplicationController
+  include TasksHelper
   helper_method :sort_column, :sort_direction
   before_filter :get_task, :only => [:edit, :update, :destroy, :modal]
   before_filter :get_shared_users, :only => [:edit, :modal]
@@ -18,6 +19,7 @@ class TasksController < ApplicationController
   end
   
   def create
+    binding.pry
     if params[:task][:sharedtasks_attributes] != nil
       params[:task][:sharedtasks_attributes] = check_for_duplicates(params[:task][:sharedtasks_attributes])
     end
@@ -42,26 +44,31 @@ class TasksController < ApplicationController
 
   def show_user_tasks
     @tasks = current_user.tasks
-    @shared_users_count, @shared_users_id = Hash.new, Hash.new
+    @users_links = Hash.new
     for task in @tasks
-      @shared_users_count[task.taskname], @shared_users_id[task.taskname] = 0, []
-      for user in task.usersintask
-        user_link = view_context.link_to("#{user.username} ", show_user_path(user.id))
-        @shared_users_id[task.taskname] << user_link
-        @shared_users_count[task.taskname] += 1
-      end
+      @users_links[task.taskname] = []
+      task.usersintask.each {|user| @users_links[task.taskname] << users_info(user)}
     end
   end
 
   def change_status
     if params[:status]
       @task = Task.find_by_id(params[:id])
+      if params[:status] == "close"
+        @task[:task_type] = "lock"
+      end
       render :json => @task.send(params[:status]) and return
     end
   end
 
   def modal
     render "_taskform", :layout => false
+  end
+
+  def side_bar_task
+    @task = Task.find_by_id(params[:task_id])
+    @taskusers = @task.users
+    render "show_task_side_bar", :layout => false
   end
 
   private   
@@ -83,6 +90,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:description, :taskname, :user_id, :status, sharedtasks_attributes: [:user_id, :task_id])
+    params.require(:task).permit(:description, :taskname, :user_id, :status, :task_number, :task_type, sharedtasks_attributes: [:user_id, :task_id])
   end
 end

@@ -19,15 +19,17 @@ label {
  	margin: 5px 5px;
  	width: 80px;
 }
-
  #content {
  	width: 99%;
-	box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);	
  }
-
+.drop {
+	min-height: 500px;
+}
 #content > div {
  	float: left;
  	width: 12%;
+ 	margin: 0px 3px;
  }
 #content > div > h5 {
 	width: 100%;
@@ -36,18 +38,16 @@ label {
 	border-bottom: 2px solid black;
 	text-align: center;
 }
-
-#content > div > div {
-	background-color: #FAFAFA;
-	background-image: linear-gradient(to bottom, #FFF, #F2F2F2);
-	min-height: 500px;
-}
-#content > div > div > p {
+.user_tasks {
 	font-size: 16px;
+	float: left;
+	border: 1px solid black;
+	width: 98%;
 }
+
 .user_tasks > span {
 	float: left;
-	width: 99%;
+	width: 98%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: "";
@@ -59,13 +59,7 @@ label {
 .user_tasks > span > a:nth-child(odd) {
 	float: left;
 }
-.user_tasks > span:nth-child(even) {
- 	background-color: #CFDCE6;
- 	margin-bottom: 2px; 
- 	border-bottom: 1px dashed black;
- }
  	
-
  #main_nav {
  	margin: 10px 5px;
  }

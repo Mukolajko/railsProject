@@ -7,12 +7,14 @@
         - @tasks.each do |task|
           - if task.status == value[1]
             %p.user_tasks{:id => "task_#{task.id}"}
-              %span= task.taskname
+              %span.taskname
+                %i{:class => "icon-#{task.task_type}"}
+                =task.taskname           
               %span
                 = link_to "Edit", edit_user_task_path(current_user.id, task.id), :class => "modal-window-open"
-                %a.popover-open.pull-right{"data-content" => @shared_users_id[task.taskname], 
+                %a.popover-open.pull-right{"data-content" => @users_links[task.taskname], 
                   "data-toggle" => "popover", :title => "Users in task"}
-                  = @shared_users_count[task.taskname]
+                  = @users_links[task.taskname].size
 .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModal", :role => "dialog", :tabindex => "-1"}
   .modal-dialog.modal-sm
     .modal-content

@@ -68,7 +68,7 @@ $(function(){
 		$(".popover-open").not(this).popover('hide');
 	});
 	//add user to task and check on duplicates
-	$(document).on('change','select',function(){
+	$(document).on('change','.user_to_task select',function(){
 		var new_id = new Date().getTime();
 		var username = $(this).find("option:selected").text();
 		var check = true
@@ -85,6 +85,16 @@ $(function(){
 		}
 
 	});
+	//show task in rightside bar
+	$(document).on('click', 'span.taskname', function(){
+		var taskID = $(this).parent().attr("id").split("_")[1];
+		$.ajax({
+			url: "show_task/side_bar/"+ taskID,
+			success: function(response){
+				$(".task_info").html(response);
+			}
+		})
+	})
 });
 //remove user from db
 function remove_user_from_task(link, taskId, username) {

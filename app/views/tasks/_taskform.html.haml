@@ -7,6 +7,9 @@
     = f.text_area :description
   = render 'add_user_field'
   - if params[:action] == "new"
+    %p
+      = f.label :task_type, "Task type"
+      = f.select(:task_type, options_for_select([["Bug", "bug"],["Task", "list"]]))
     .current_users
       Current users in this task :
     %p.button= f.submit "Create task"
@@ -14,8 +17,7 @@
     .current_users
       Current users in this task :
       - for user in @taskusers do
-        - if current_user.username != user.username
-          %p{:class => user.username}
-            = user.username
-            (#{link_to_function "remove", "remove_user_from_task(this, #{@task.id}, '#{user.username}')"});
+        %p{:class => user.username}
+          = user.username
+          (#{link_to_function "remove", "remove_user_from_task(this, #{@task.id}, '#{user.username}')"})
     %p.button= f.submit "Update task"

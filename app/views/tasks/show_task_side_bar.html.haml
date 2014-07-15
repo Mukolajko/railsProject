@@ -1,0 +1,12 @@
+%p
+  Link:
+  = link_to @task.taskname, edit_user_task_path(current_user.id, @task.id)
+%p
+  Status: 
+  = @task.status
+.current_users
+  Current users in task :
+  - for user in @taskusers do
+    %p{:class => user.username}
+      = user.username
+      (#{link_to_function "remove", "remove_user_from_task(this, #{@task.id}, '#{user.username}')"})
