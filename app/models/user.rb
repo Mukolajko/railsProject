@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :sharedtasks
   has_many :tasks, :through => :sharedtasks
-  has_attached_file :avatar, :styles => {:medium => "250x250"}, :default_url => "rails.png"
+  has_attached_file :avatar, :styles => {:medium => "250x250"}
   attr_accessor :password	
 
   before_save :encrypt_password
