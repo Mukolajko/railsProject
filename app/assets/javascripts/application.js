@@ -23,6 +23,10 @@ $(function(){
 		$.getScript(this.href);
 		return false;
 	});
+	//show update form for user profile
+	$("#update_profile").click(function(){
+		$("#update_form").slideToggle();
+	});
 	//sortable functional plus change status in DB
 	$(".drop").sortable({
 		connectWith: ".drop",

@@ -30,6 +30,11 @@ class UsersController < ApplicationController
   	end
   end
 
+  def update
+    flash = current_user.update_attributes(user_params) ? {:notice => "Updated"} : {:notice => current_user.errors.full_messages.to_sentence}
+    redirect_to :back, flash
+  end
+
   def show
     @tasks = current_user.tasks
                          .order("#{sort_column} #{sort_direction}")
@@ -44,6 +49,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :avatar)
   end
 end

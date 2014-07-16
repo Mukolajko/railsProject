@@ -1,7 +1,9 @@
 %div
-  %p
-    Username : #{@user.username}
+  %h4
+    #{@user.username}
+  = image_tag @user.avatar.url(:medium)
   %p
     Email : #{@user.email}
   %p
     Created at : #{@user.created_at}
+
