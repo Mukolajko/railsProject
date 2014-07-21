@@ -4,7 +4,6 @@
 
 jQuery ->
 	$("#task_file").fileupload
-		dataType: 'json'
 		add: (e, data) ->
 			types = /(\.|\/)(gif|jpe?g|png)$/i
 			file = data.files[0]
@@ -13,3 +12,6 @@ jQuery ->
 				data.submit()
 			else
 				alert("Wrong format")
+		progress: (e, data) ->
+			percent = parseInt(data.loaded / data.total * 100, 10)
+			$(".bar").css('width', percent + "%")
