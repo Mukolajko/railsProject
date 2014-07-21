@@ -37,5 +37,7 @@
           %i.icon-plus.icon-white
           Add files
           = f.file_field :file, multiple: true, :name => "task[taskfiles_attributes][0][file]"
+      .progress.progress-striped.active
+        .bar
     = javascript_include_tag "tasks"
     %p.button= f.submit "Update task"

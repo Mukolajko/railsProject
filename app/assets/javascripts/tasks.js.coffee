@@ -6,6 +6,10 @@ jQuery ->
 	$("#task_file").fileupload
 		dataType: 'json'
 		add: (e, data) ->
+			types = /(\.|\/)(gif|jpe?g|png)$/i
 			file = data.files[0]
-			$(".new_files").append("<p>" +file.name+ "</p>")
-			data.submit()
+			if types.test(file.type)
+				$(".new_files").append("<p>" +file.name+ "</p>")
+				data.submit()
+			else
+				alert("Wrong format")
