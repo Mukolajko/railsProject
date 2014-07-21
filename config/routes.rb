@@ -10,6 +10,7 @@ RailsProject::Application.routes.draw do
   get "show_task/side_bar/:task_id" => "tasks#side_bar_task"
   get "edit_tasks" => "tasks#show_user_tasks", :as => "edit_tasks"
   get "remove/:task_id/:username" => "users#remove_user_from_task"
+  get "removefile/:file_id" => "tasks#remove_file_from_task"
   # You can have the root of your site routed with "root"
   root 'users#index'
 

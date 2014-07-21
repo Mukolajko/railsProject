@@ -1,8 +1,10 @@
 class Task < ActiveRecord::Base
   belongs_to :user
   has_many :sharedtasks
+  has_many :taskfiles
   has_many :users, :through => :sharedtasks
   accepts_nested_attributes_for :sharedtasks, reject_if: proc {|attr| attr[:user_id].blank?}, :allow_destroy => true
+  accepts_nested_attributes_for :taskfiles, :allow_destroy => true
 
   def usersintask
   	@usersintask ||= users

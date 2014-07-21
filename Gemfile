@@ -26,6 +26,7 @@ gem 'html2haml'
  gem 'coffee-rails', '~> 4.0.0'
  gem 'uglifier', '>= 1.3.0'
  gem 'paperclip', '~>4.1' 
+ gem 'jquery-fileupload-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
 

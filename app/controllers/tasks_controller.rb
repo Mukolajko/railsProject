@@ -15,6 +15,7 @@
   def new
     @task = Task.new
     shared = @task.sharedtasks.build
+    @task.taskfiles.build
     render '_taskform'
   end
   
@@ -26,6 +27,10 @@
     @task = current_user.tasks.create(task_params)
     flash = @task.save ? {:notice => "Add task to DB"} : {:alert => "Something went wrong. Try again!"}
     redirect_to user_path(current_user.id), flash
+  end
+
+  def edit
+    @taskfiles = @task.taskfiles
   end
 
   def update
@@ -61,6 +66,7 @@
   end
 
   def modal
+    @taskfiles = @task.taskfiles
     render "_taskform", :layout => false
   end
 
@@ -70,6 +76,10 @@
     render "show_task_side_bar", :layout => false
   end
 
+  def remove_file_from_task
+    @query = Taskfile.find_by_id(params[:file_id]).destroy
+    render :json => @query and return
+  end
   private   
 
   def get_task
@@ -89,6 +99,6 @@
   end
 
   def task_params
-    params.require(:task).permit(:description, :taskname, :user_id, :status, :task_number, :task_type, sharedtasks_attributes: [:user_id, :task_id])
+    params.require(:task).permit(:description, :taskname, :user_id, :status, :task_number, :task_type, taskfiles_attributes: [:file], sharedtasks_attributes: [:user_id, :task_id])
   end
 end

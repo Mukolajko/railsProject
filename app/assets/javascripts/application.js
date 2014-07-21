@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery.ui.sortable
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require_tree .
  
 $(function(){
@@ -83,7 +85,7 @@ $(function(){
 			}
 		});
 		if (check) {
-			$(this).parent().next().append(
+			$(this).parent().parent().find(".current_users").append(
 				"<p class='"+username+"'><input type='hidden' name='task[sharedtasks_attributes]["+new_id+"][user_id]' value='"+$(this).val()+"'/>"+username+"(<a href='#' onclick='remove_this_user(this)'>remove</a>);</p>"
 			);
 		}
@@ -108,6 +110,27 @@ function remove_user_from_task(link, taskId, username) {
 			if (response != "false") {
 				$(link).parent().hide();
 				$(document).find(".edit_task").before("<p class='message'>Removed</p>");
+				$(document).find(".message").fadeOut(600, function(){
+					$(this).remove();
+				});
+			}
+			else {
+				$(document).find(".edit_task").before("<p>Something bad happened</p>");
+			}
+		},
+		error: function(){
+			$(document).find(".edit_task").before("<p>Something bad happened</p>");
+		}
+	});
+}
+//remove file from db
+function remove_file_from_task(link, fileID) {
+	$.ajax({
+		url: "/removefile/" + fileID,
+		success: function(response) {
+			if (response != "false") {
+				$(link).parent().hide();
+				$(document).find(".edit_task").before("<p class='message'>File Removed</p>");
 				$(document).find(".message").fadeOut(600, function(){
 					$(this).remove();
 				});

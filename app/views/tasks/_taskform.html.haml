@@ -1,4 +1,4 @@
-= form_for [current_user, @task] do |f|
+= form_for [current_user, @task], :html => {:multipart => true} do |f|
   %p
     = f.label "Taskname"
     = f.text_field :taskname
@@ -10,6 +10,10 @@
     %p
       = f.label :task_type, "Task type"
       = f.select(:task_type, options_for_select([["Bug", "bug"],["Task", "list"]]))
+    %p
+      = f.fields_for :taskfiles do |builder|
+        = builder.label :file
+        = builder.file_field :file  
     .current_users
       Current users in this task :
     %p.button= f.submit "Create task"
@@ -19,5 +23,19 @@
       - for user in @taskusers do
         %p{:class => user.username}
           = user.username
-          (#{link_to_function "remove", "remove_user_from_task(this, #{@task.id}, '#{user.username}')"})
+          (#{link_to_function "remove user", "remove_user_from_task(this, #{@task.id}, '#{user.username}')"}) 
+    .files_list
+      Files list :
+      - @taskfiles.each do |file|
+        %p
+          = link_to file.file_file_name, file.file.url(:medium)
+          (#{link_to_function "delete file", "remove_file_from_task(this, #{file.id})"}) 
+      .new_files
+    .row.fileupload-buttonbar
+      .span7
+        %span.btn.btn-success.fileinput-button
+          %i.icon-plus.icon-white
+          Add files
+          = f.file_field :file, multiple: true, :name => "task[taskfiles_attributes][0][file]"
+    = javascript_include_tag "tasks"
     %p.button= f.submit "Update task"
