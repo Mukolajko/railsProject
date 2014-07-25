@@ -23,9 +23,18 @@
     if params[:task][:sharedtasks_attributes] != nil
       params[:task][:sharedtasks_attributes] = check_for_duplicates(params[:task][:sharedtasks_attributes])
     end
-    params[:task][:status] = "new"
+    params[:task][:status] = "new"    
     @task = current_user.tasks.create(task_params)
-    flash = @task.save ? {:notice => "Add task to DB"} : {:alert => "Something went wrong. Try again!"}
+    errors = {}
+    if @task.valid?
+      params[:taskfiles_multiple].each_with_index do |v, index| 
+        taskfile = @task.taskfiles.new(:file => v)
+        errors["Taskfile_#{index}"] = taskfile.errors.full_messages.join(";") unless taskfile.save
+      end
+    else
+      errors["task"] = @task.errors.full_messages.join(";")
+    end 
+    flash = errors.empty? ? {:notice => "Add to DB"} : {:alert => errors.map{|k,v| "#{k} => #{v}"}} 
     redirect_to user_path(current_user.id), flash
   end
 
@@ -37,8 +46,8 @@
     if params[:task][:sharedtasks_attributes] != nil
       params[:task][:sharedtasks_attributes] = check_for_duplicates(params[:task][:sharedtasks_attributes], @task.id)
     end
-    notice = @task.update_attributes(task_params) ? "Task updated" : "Something went wrong. Try again!"
-    redirect_to :back, :notice => notice
+    flash = @task.update_attributes(task_params) ? {:notice => "Task updated"} : {:notice =>  @task.errors.full_messages.first}
+    redirect_to :back, flash
   end
 
   def destroy

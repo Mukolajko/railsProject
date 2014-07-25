@@ -13,7 +13,7 @@
     %p
       = f.fields_for :taskfiles do |builder|
         = builder.label :file
-        = builder.file_field :file  
+        = builder.file_field :file, multiple: true, :name => "taskfiles_multiple[]"
     .current_users
       Current users in this task :
     %p.button= f.submit "Create task"
