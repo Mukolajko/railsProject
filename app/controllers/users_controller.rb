@@ -26,6 +26,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
   	  redirect_to user_path(@user.id), :notice => "sighned up"
   	else
+  	  flash.now[:alert] = "errors"
   	  render "new"
   	end
   end
